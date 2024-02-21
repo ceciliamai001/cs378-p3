@@ -91,29 +91,34 @@ function MenuHeader() {
 
 function App() {
   const [cost, setCost] = useState(0);
+  const [cart, setCart] = useState({});
 
   const updateCart = (priceChange) => {
     setCost(Math.max(cost + priceChange, 0));
   };
 
+  function handleItemChange(title, itemCount) {
+    cart[title] = itemCount;
+    setCart(cart);
+  }
+
   const handleOrder = () => {
-    // if (totalQuantity === 0) {
-    //   alert("No items in cart");
-    // } else {
-    //   const orderedItems = menuItems
-    //     .filter(item => item.quantity > 0)
-    //     .map(item => `${item.title}: ${item.quantity}`);
-  
-    //   if (orderedItems.length > 0) {
-    //     const orderMessage = `Order placed!\n\nItems ordered:\n${orderedItems.join("\n")}`;
-    //     alert(orderMessage);
-    //   }
-    // }
+    if (cost === 0) {
+      alert("No items in cart");
+      return;
+    }
+
+    let cartMsg = "";
+
+    Object.keys(cart).forEach((title) => {
+      cartMsg += cart[title] + " " + title + "\n";
+    });
+
+    alert("Order Placed! \n" + cartMsg);
   };
 
   const handleClearAll = () => {
     setCost(0);
-    
   };
   
   return (
@@ -127,6 +132,8 @@ function App() {
           imageName={item.imageName}
           price={item.price}
           updateCart={updateCart}
+          cost={cost}
+          handleItemChange={handleItemChange}
          />
         ))}
       </div>
