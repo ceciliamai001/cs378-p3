@@ -90,10 +90,30 @@ function MenuHeader() {
 };
 
 function App() {
-  const [totalCost, setTotalCost] = useState(0);
+  const [cost, setCost] = useState(0);
 
   const updateCart = (priceChange) => {
-    setTotalCost(Math.max(totalCost + priceChange, 0));
+    setCost(Math.max(cost + priceChange, 0));
+  };
+
+  const handleOrder = () => {
+    // if (totalQuantity === 0) {
+    //   alert("No items in cart");
+    // } else {
+    //   const orderedItems = menuItems
+    //     .filter(item => item.quantity > 0)
+    //     .map(item => `${item.title}: ${item.quantity}`);
+  
+    //   if (orderedItems.length > 0) {
+    //     const orderMessage = `Order placed!\n\nItems ordered:\n${orderedItems.join("\n")}`;
+    //     alert(orderMessage);
+    //   }
+    // }
+  };
+
+  const handleClearAll = () => {
+    setCost(0);
+    
   };
   
   return (
@@ -111,7 +131,9 @@ function App() {
         ))}
       </div>
       <div className="subtotal">
-        Subtotal: ${totalCost.toFixed(2)}
+        Subtotal: ${cost.toFixed(2)}
+        <button className="btn btn-primary" onClick={handleOrder} style={{ marginLeft: '10px' }}>Order</button>
+        <button className="btn btn-secondary" onClick={handleClearAll} style={{ marginLeft: '10px' }}>Clear All</button>
       </div>
     </div>
   );

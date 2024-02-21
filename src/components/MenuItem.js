@@ -6,16 +6,16 @@ import 'bootstrap/dist/css/bootstrap.css';
 // Use bootstrap to style the elements so that it looks like the mockup in the assignment.
 // Hint: You can use the image name to get the image from the images folder.
 const MenuItem = ({ title, description, imageName, price, updateCart }) => {
-    const [quantity, setQuantity] = useState(0);
+    const [itemCount, setItemCount] = useState(0);
 
     const add = () => {
-        setQuantity(quantity + 1);
+        setItemCount(itemCount + 1);
         updateCart(price);
     };
 
     const remove = () => {
-        if (quantity > 0) {
-            setQuantity(quantity - 1);
+        if (itemCount > 0) {
+            setItemCount(itemCount - 1);
             updateCart(-price);
         }
     };
@@ -35,9 +35,9 @@ const MenuItem = ({ title, description, imageName, price, updateCart }) => {
                                 <div className='left'><p>{price}</p></div>
                             </div>
                             <div className="col-4">
-                                <div className="quantity">
+                                <div className="cart">
                                     <button className="btn btn-outline-primary" onClick={remove}>-</button>
-                                    <span style={{ margin: '10px' }}>{quantity}</span>
+                                    <span style={{ margin: '10px' }}>{itemCount}</span>
                                     <button className="btn btn-outline-primary" onClick={add}>+</button>
                                 </div>
                             </div>
