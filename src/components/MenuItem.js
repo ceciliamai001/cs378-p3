@@ -19,8 +19,6 @@ const MenuItem = ({ title, description, imageName, price, updateCart }) => {
             updateCart(-price);
         }
     };
-
-    const subtotal = (quantity * price).toFixed(2);
     
     return (
         <div className='container'>

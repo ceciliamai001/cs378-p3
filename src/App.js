@@ -1,4 +1,5 @@
 import './App.css';
+import React, { useState } from 'react';
 import MenuItem from './components/MenuItem';
 import logo from './images/Basil_Thai_Logo.avif';
 
@@ -89,6 +90,12 @@ function MenuHeader() {
 };
 
 function App() {
+  const [totalCost, setTotalCost] = useState(0);
+
+  const updateCart = (priceChange) => {
+    setTotalCost(Math.max(totalCost + priceChange, 0));
+  };
+  
   return (
     <div className='body'>
       <MenuHeader />
@@ -99,8 +106,12 @@ function App() {
           description={item.description}
           imageName={item.imageName}
           price={item.price}
+          updateCart={updateCart}
          />
         ))}
+      </div>
+      <div className="subtotal">
+        Subtotal: ${totalCost.toFixed(2)}
       </div>
     </div>
   );
